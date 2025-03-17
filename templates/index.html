@@ -1,0 +1,32 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>House Price Prediction</h2>
+        <form action="/predict" method="POST">
+            <label for="size">Size (in sq. ft.):</label>
+            <input type="number" id="size" name="size" required><br><br>
+
+            <label for="bedrooms">Number of Bedrooms:</label>
+            <input type="number" id="bedrooms" name="bedrooms" required><br><br>
+
+            <label for="location">Location (1 for Location 1, 2 for Location 2):</label>
+            <input type="number" id="location" name="location" required><br><br>
+
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if linear_prediction is not none %}
+            <h3>Predicted Price using Linear Regression: ₹{{ linear_prediction }}</h3>
+            <h3>Predicted Price using Polynomial Regression: ₹{{ poly_prediction }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
